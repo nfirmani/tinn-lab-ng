@@ -1,0 +1,113 @@
+
+<!-- 07 String Interpolation -->
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-subtitle>{{ cani[0].nome.toUpperCase() }}</mat-card-subtitle>
+    <mat-card-title>{{(3>2 ? 'cane lupo':'aski')}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>This card has divider and indeterminate progress as footer</p>
+    <p>{{ cani[0].descrizione }}</p>
+    <mat-divider></mat-divider>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>LIKE</button>
+    <button mat-button>SHARE</button>
+  </mat-card-actions>
+  <mat-card-footer>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>
+
+<!-- 08 Property Binding  -->
+<button mat-raised-button color="primary" [disabled]="this.isDisabled">Esempio property binding</button>
+<p></p>
+<!-- 09 Event Binding  -->
+<p>Event Binding </p>
+<button mat-raised-button color="primary" (click)="onClick(this)" >Esempio Event Binding</button>
+
+<mat-form-field class="example-full-width">
+  <mat-label>Esempio event binding</mat-label>
+  <input matInput placeholder="event binding" (input)="onInput($event)">
+</mat-form-field>
+
+<button mat-raised-button color="primary" (click)="onClick2($event)">primary</button>
+<mat-form-field class="example-full-width">
+<mat-label>es. two way binding</mat-label>
+<!-- 10 Two way Binding  -->
+<input matInput placeholder="two way bindinf" [(ngModel)]="title">
+</mat-form-field>
+<p>{{title}}</p>
+
+<!-- 12 Direttiva strutturale  *ngIf -->
+<p *ngIf="isVisibile; then bloccoIf else bloccoElse"> Visibile</p>
+<ng-template #bloccoIf>
+  <p> visibile</p>
+</ng-template>
+<ng-template #bloccoElse>
+  <p> non visibile</p>
+</ng-template>
+
+<!-- 13 Direttiva strutturale *ngFor -->
+<ul>
+  <li *ngFor="let persona of persone">
+    {{persona.nome}} - {{persona.cognome}}
+  </li>
+</ul>
+
+<p *ngFor="let persona of persone">
+  <strong>{{persona.nome}}</strong> - {{persona.cognome}}
+  <span class="cerchio-verde" *ngIf="persona.isOnLine">*</span>
+  <span class="cerchio-rosso" *ngIf="!persona.isOnLine">*</span>
+</p>
+
+<p *ngFor="let persona of persone; index as i">
+  <strong>{{i}}</strong> {{persona.nome}} - {{persona.cognome}}
+  <span class="cerchio-verde" *ngIf="i > 2">*</span>
+</p>
+
+<!-- 14 Direttiva [ngSwitch]  e direttiva strutturale *ngSwitchCase  -->
+<div [ngSwitch]="numeroCase">
+  <p *ngSwitchCase="1">uno </p>
+  <p *ngSwitchCase="2">due</p>
+  <p *ngSwitchCase="5">cinque</p>
+  <p *ngSwitchDefault>valore di default</p>
+</div>
+
+<div [ngSwitch]="stringaCase">
+  <p *ngSwitchCase="'uno'">uno </p>
+  <p *ngSwitchCase="'due'">due</p>
+  <p *ngSwitchCase="'tre'">tre</p>
+  <p *ngSwitchDefault>valore di default</p>
+</div>
+
+<!-- 15 Direttiva strutturale  *ngStyle  -->
+<!-- property binding di ngStyle -->
+<ul>
+  <li *ngFor="let persona of persone">
+    <!-- <div class="cerchio" [ngStyle]="{'background': (persona.isOnLine) ? 'green' : 'red'}"></div> -->
+    <div class="cerchio" [ngStyle]="{'background': persona.color}"></div>
+    <p>{{persona.nome}} {{persona.cognome}}</p>
+  </li>
+</ul>
+
+<!-- 16 Direttiva strutturale  *ngClass  -->
+<ul>
+  <li *ngFor="let persona of persone; index as i ">
+    <!-- <div class="cerchio" [ngStyle]="{'background': (persona.isOnLine) ? 'green' : 'red'}"></div> -->
+    <div class="cerchio" [ngClass]="{'cerchioOnLine prova':persona.isOnLine, 'cerchioOffLine':!persona.isOnLine, 'prova': persona.color == 'yellow'}">i</div>
+    <p>{{persona.nome}} {{persona.cognome}}</p>
+  </li>
+</ul>
+<!-- utilizzando l'operatore ternario -->
+<p> utilizzando operatorio ternario si possono avere solo due casi</p>
+<ul>
+  <li *ngFor="let persona of persone; index as i ">
+    <!-- <div class="cerchio" [ngStyle]="{'background': (persona.isOnLine) ? 'green' : 'red'}"></div> -->
+    <div class="cerchio" [ngClass]="persona.isOnLine ? 'cerchioOnLine':'cerchioOffLine'">i</div>
+    <p>{{persona.nome}} {{persona.cognome}}</p>
+  </li>
+</ul>
+
+
+
